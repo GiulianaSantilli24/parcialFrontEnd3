@@ -1,7 +1,7 @@
 import react from "react";
 import Data from "./data.json"
 
-//inicializar el contador por fuera de la clase
+//inicializar el contador por fuera de la clase para que su scope sea global
 
 let contador = 1;
 
@@ -12,7 +12,7 @@ class Botones extends react.Component {
     constructor(props) {
         super(props)
 
-        this.state = { historiaNueva: Data[0].historia, ultimaEleccion: "", listaElecciones: [], opcionA: Data[0].opciones.a, opcionB: Data[0].opciones.b };
+        this.state = { historiaNueva:Data[0].historia, ultimaEleccion: "", listaElecciones: [], opcionA: Data[0].opciones.a, opcionB: Data[0].opciones.b };
 
         // agrego los handleChange al constructor
 
@@ -22,15 +22,15 @@ class Botones extends react.Component {
 
         this.handleChangeOpcionB = this.handleChangeOpcionB.bind(this);
     }
-
+     componentDidUpdate(props) {
+        contador = 1;
+      }
 
     // creo la funcion handleChange para reiniciar la historia en cualquier momento y al finalizar la historia 
 
     handleChangeReiniciarHistoria() {
 
         contador = 1;
-
-        let historiaNueva = Data.filter(data => data.id === 1);
 
         this.setState({ historiaNueva: Data[0].historia, ultimaEleccion: [], listaElecciones: [], opcionA: Data[0].opciones.a, opcionB: Data[0].opciones.b })
     }
@@ -70,7 +70,7 @@ class Botones extends react.Component {
         }
     }
 
-    //renderizo los botones, divs, botones y spans para que se vean correctamente en el html
+    //renderizo los divs, botones y spans para que se vean correctamente en el html
 
     render() {
         return (
@@ -87,7 +87,7 @@ class Botones extends react.Component {
                     <span className="opciones">{this.state.opcionB}</span>
                 </div>
                 <div className="recordatorio">
-                    <p>última elección: {this.state.ultimaEleccion}</p>
+                    <p>Selección previa: {this.state.ultimaEleccion}</p>
                     <p>recordatorio de todas las selecciones anteriores:<ul> {this.state.listaElecciones.map((eleccion, index) => <li key={eleccion + index}>{eleccion}</li>)}</ul></p>
                     <div>
                         <button className="botones" onClick={this.handleChangeReiniciarHistoria}> Reiniciar Historia </button>
