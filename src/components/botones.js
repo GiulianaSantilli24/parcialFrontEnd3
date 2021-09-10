@@ -12,7 +12,7 @@ class Botones extends react.Component {
     constructor(props) {
         super(props)
 
-        this.state = { historiaNueva:Data[0].historia, ultimaEleccion: "", listaElecciones: [], opcionA: Data[0].opciones.a, opcionB: Data[0].opciones.b };
+        this.state = {  historiaNueva: Data[0].historia, ultimaEleccion: "", listaElecciones: [], opcionA: Data[0].opciones.a, opcionB: Data[0].opciones.b };
 
         // agrego los handleChange al constructor
 
@@ -22,6 +22,13 @@ class Botones extends react.Component {
 
         this.handleChangeOpcionB = this.handleChangeOpcionB.bind(this);
     }
+
+// compruebo la actualizacion del contador
+    componentDidUpdate() {
+        if (contador === 0) {
+          contador = 1;
+        }
+      }
 
     // creo la funcion handleChange para reiniciar la historia en cualquier momento y al finalizar la historia 
 
