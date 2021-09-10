@@ -22,9 +22,6 @@ class Botones extends react.Component {
 
         this.handleChangeOpcionB = this.handleChangeOpcionB.bind(this);
     }
-     componentDidUpdate(props) {
-        contador = 1;
-      }
 
     // creo la funcion handleChange para reiniciar la historia en cualquier momento y al finalizar la historia 
 
